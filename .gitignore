@@ -25,3 +25,9 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 clarx_api-*.tar
 
+# Ignore editor files
+/.elixir_ls/
+/.vscode/
+
+# Ignore env files
+/.env
