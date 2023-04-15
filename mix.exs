@@ -34,15 +34,15 @@ defmodule ClarxApi.MixProject do
     [
       {:phoenix, "~> 1.7.2"},
       {:phoenix_ecto, "~> 4.4"},
-      {:ecto_sql, "~> 3.6"},
+      {:ecto_sql, "~> 3.10"},
       {:postgrex, ">= 0.0.0"},
-      {:swoosh, "~> 1.3"},
-      {:finch, "~> 0.13"},
+      {:swoosh, "~> 1.9"},
+      {:finch, "~> 0.16"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
-      {:gettext, "~> 0.20"},
-      {:jason, "~> 1.2"},
-      {:plug_cowboy, "~> 2.5"}
+      {:gettext, "~> 0.22"},
+      {:jason, "~> 1.4"},
+      {:plug_cowboy, "~> 2.6"}
     ]
   end
 
