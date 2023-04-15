@@ -26,6 +26,9 @@ config :clarx_api, ClarxApiWeb.Endpoint,
   pubsub_server: ClarxApi.PubSub,
   live_view: [signing_salt: "b+rHL+QT"]
 
+# Configures the tzdata
+config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase
+
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails
