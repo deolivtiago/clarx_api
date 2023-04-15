@@ -1,4 +1,7 @@
-# ClarxApi
+# Clarx API
+
+[![ci](https://github.com/deolivtiago/clarx_api/actions/workflows/ci.yml/badge.svg)](https://github.com/deolivtiago/clarx_api/actions/workflows/ci.yml)
+[![coverage](https://coveralls.io/repos/github/deolivtiago/clarx_api/badge.svg)](https://coveralls.io/github/deolivtiago/clarx_api)
 
 To start your Phoenix server:
 
