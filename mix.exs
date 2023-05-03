@@ -10,6 +10,7 @@ defmodule ClarxApi.MixProject do
       start_permanent: Mix.env() == :prod,
       preferred_cli_env: [
         ci: :test,
+        "test.reset": :test,
         coveralls: :test,
         "coveralls.detail": :test,
         "coveralls.post": :test,
