@@ -26,6 +26,11 @@ config :clarx_api, ClarxApiWeb.Endpoint,
   pubsub_server: ClarxApi.PubSub,
   live_view: [signing_salt: "b+rHL+QT"]
 
+# Configures the Guardian
+config :clarx_api, ClarxApiWeb.Auth.Guardian,
+  issuer: "clarx_api",
+  secret_key: "dawyGrw3MGVglXNC6VacvlcGer6r8td/tLuxP0kWTUiMKTVjXosp433Dj4rI0/x5"
+
 # Configures the tzdata
 config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase
 
