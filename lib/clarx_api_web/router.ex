@@ -5,8 +5,12 @@ defmodule ClarxApiWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug ClarxApiWeb.Auth.Pipeline
+  end
+
   scope "/", ClarxApiWeb do
-    pipe_through :api
+    pipe_through [:api, :auth]
 
     resources "/users", UserController, except: [:new, :edit]
   end
