@@ -61,7 +61,7 @@ defmodule ClarxApi.AccountsTest do
   end
 
   describe "create_user/1 returns :ok" do
-    test "when the user attributes are valid", %{attrs: attrs} do
+    test "when the user attrs are valid", %{attrs: attrs} do
       assert {:ok, %User{} = user} = Accounts.create_user(attrs)
 
       assert user.email == attrs.email
@@ -71,7 +71,7 @@ defmodule ClarxApi.AccountsTest do
   end
 
   describe "create_user/1 returns :error" do
-    test "when the user attributes are invalid" do
+    test "when the user attrs are invalid" do
       attrs = %{email: "???", name: nil, password: "?"}
 
       assert {:error, changeset} = Accounts.create_user(attrs)
@@ -83,7 +83,7 @@ defmodule ClarxApi.AccountsTest do
       assert Enum.member?(errors.password, "should be at least 6 character(s)")
     end
 
-    test "when the user attributes are not given" do
+    test "when the user attrs are not given" do
       assert {:error, changeset} = Accounts.create_user()
       errors = errors_on(changeset)
 
@@ -109,7 +109,7 @@ defmodule ClarxApi.AccountsTest do
   describe "update_user/2 returns :ok" do
     setup [:insert_user]
 
-    test "when the user attributes are valid", %{user: user, attrs: attrs} do
+    test "when the user attrs are valid", %{user: user, attrs: attrs} do
       assert {:ok, %User{} = user} = Accounts.update_user(user, attrs)
 
       assert attrs.email == user.email
@@ -121,7 +121,7 @@ defmodule ClarxApi.AccountsTest do
   describe "update_user/2 returns :error" do
     setup [:insert_user]
 
-    test "when the user attributes are invalid", %{user: user} do
+    test "when the user attrs are invalid", %{user: user} do
       invalid_attrs = %{email: "?@?", name: "?", password: nil}
 
       assert {:error, changeset} = Accounts.update_user(user, invalid_attrs)

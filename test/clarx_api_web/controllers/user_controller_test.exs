@@ -3,7 +3,7 @@ defmodule ClarxApiWeb.UserControllerTest do
 
   import ClarxApi.Factories.UserFactory
 
-  alias ClarxApiWeb.Auth
+  alias ClarxApiWeb.Auth.AuthHandler
 
   @id_not_found Ecto.UUID.generate()
 
@@ -30,7 +30,7 @@ defmodule ClarxApiWeb.UserControllerTest do
   describe "create/2 returns success" do
     setup [:insert_user, :put_auth]
 
-    test "when the user parameters are valid", %{conn: conn} do
+    test "when the user params are valid", %{conn: conn} do
       user_params = params_for(:user)
 
       conn = post(conn, ~p"/users", user: user_params)
@@ -45,7 +45,7 @@ defmodule ClarxApiWeb.UserControllerTest do
   describe "create/2 returns error" do
     setup [:insert_user, :put_auth]
 
-    test "when the user parameters are invalid", %{conn: conn} do
+    test "when the user params are invalid", %{conn: conn} do
       user_params = %{email: "???", name: nil, password: "?"}
 
       conn = post(conn, ~p"/users", user: user_params)
@@ -87,7 +87,7 @@ defmodule ClarxApiWeb.UserControllerTest do
   describe "update/2 returns success" do
     setup [:insert_user, :put_auth]
 
-    test "when the user parameters are valid", %{conn: conn, user: user} do
+    test "when the user params are valid", %{conn: conn, user: user} do
       user_params = params_for(:user)
 
       conn = put(conn, ~p"/users/#{user}", user: user_params)
@@ -103,7 +103,7 @@ defmodule ClarxApiWeb.UserControllerTest do
   describe "update/2 returns error" do
     setup [:insert_user, :put_auth]
 
-    test "when the user parameters are invalid", %{conn: conn, user: user} do
+    test "when the user params are invalid", %{conn: conn, user: user} do
       user_params = %{email: "?@?", name: "?", password: nil}
 
       conn = put(conn, ~p"/users/#{user}", user: user_params)
@@ -145,7 +145,11 @@ defmodule ClarxApiWeb.UserControllerTest do
   end
 
   defp put_auth(%{conn: conn, user: user}) do
-    {:ok, %{token: %{access: token}}} = Auth.authenticate(user, user.password)
+    {:ok, %{token: %{access: token}}} =
+      Map.new()
+      |> Map.put("email", user.email)
+      |> Map.put("password", user.password)
+      |> AuthHandler.authenticate_user()
 
     conn
     |> put_req_header("authorization", "Bearer #{token}")

@@ -1,9 +1,9 @@
 defmodule ClarxApiWeb.Json.AuthJSONTest do
-  use ClarxApiWeb.ConnCase, async: true
+  use ClarxApiWeb.ConnCase
 
   import ClarxApi.Factories.UserFactory
 
-  alias ClarxApiWeb.Auth
+  alias ClarxApiWeb.Auth.AuthHandler
   alias ClarxApiWeb.AuthJSON
 
   describe "show/1 returns success" do
@@ -21,11 +21,14 @@ defmodule ClarxApiWeb.Json.AuthJSONTest do
 
   defp build_user(_) do
     :user
-    |> build()
+    |> insert()
     |> then(&{:ok, user: &1})
   end
 
   defp build_auth(%{user: user}) do
-    Auth.authenticate(user, user.password)
+    Map.new()
+    |> Map.put("email", user.email)
+    |> Map.put("password", user.password)
+    |> AuthHandler.authenticate_user()
   end
 end
