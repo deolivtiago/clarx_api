@@ -10,6 +10,13 @@ defmodule ClarxApiWeb.Router do
   end
 
   scope "/", ClarxApiWeb do
+    pipe_through :api
+
+    post "/signup", AuthController, :signup
+    post "/signin", AuthController, :signin
+  end
+
+  scope "/", ClarxApiWeb do
     pipe_through [:api, :auth]
 
     resources "/users", UserController, except: [:new, :edit]
